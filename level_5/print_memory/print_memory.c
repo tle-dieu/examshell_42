@@ -2,7 +2,7 @@
 
 void	print_ascii(int n)
 {
-	if (31 < n && n < 127)
+	if (n > 31 && n < 127)
 		write(1, &n, 1);
 	else
 		write(1, ".", 1);
