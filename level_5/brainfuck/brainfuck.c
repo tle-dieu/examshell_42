@@ -15,7 +15,7 @@ unsigned char	*ft_init_tab(size_t size)
 char			*ft_begin_loop(char *srcode, unsigned char *byte)
 {
 	int count;
-	
+
 	if (!*byte)
 	{
 		count = 1;
@@ -75,9 +75,10 @@ void			ft_brainfuck(char *srcode)
 		srcode++;
 	}
 }
-int		main(int argc, char **av) 
+
+int		main(int ac, char **av) 
 {
-	if (argc == 2)
+	if (ac == 2)
 		ft_brainfuck(av[1]);
 	return (0);
 	
