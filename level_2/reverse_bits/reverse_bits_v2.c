@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_bits.c                                        :+:      :+:    :+:   */
+/*   reverse_bits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 11:24:56 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/12/27 14:33:28 by tle-dieu         ###   ########.fr       */
+/*   Created: 2018/11/10 11:36:53 by tle-dieu          #+#    #+#             */
+/*   Updated: 2018/12/27 15:07:14 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned char	swap_bits(unsigned char octet)
+unsigned char	reverse_bits(unsigned char octet)
 {
-	return (octet << 4 | octet >> 4);	
+	return ((octet * 0x0202020202ULL & 0x010884422010ULL) % 0x3ff);
 }
