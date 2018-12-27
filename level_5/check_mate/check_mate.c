@@ -6,7 +6,7 @@
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:18:21 by exam              #+#    #+#             */
-/*   Updated: 2018/11/27 11:41:00 by exam             ###   ########.fr       */
+/*   Updated: 2018/12/27 01:15:42 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int		check_board(char **board, int size)
 	while (j < size)
 	{
 		i = 0;
-		if (ft_strlen(board[j]) != size)
+		while (board[j][i])
+			i++;
+		if (i != size)
 			return (1);
+		i = 0;
 		while (i < size)
 			if (board[j][i++] == 'K')
 				king++;
@@ -134,7 +137,7 @@ int		check_mate(char **board, int size)
 int		main(int ac, char **av)
 {
 	if (ac > 1)
-		(check_mate(av + 1, ac - 1) ? ft_putstr("Success") : ft_putstr("Fail"));
-	ft_putchar ('\n');	
+		check_mate(av + 1, ac - 1) ? write(1, "Success", 7) : write(1, "Fail", 4);
+	write(1, "\n", 1);
 	return (0);
 }
