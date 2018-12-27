@@ -3,38 +3,38 @@ Expected files   : *.c, *.h
 Allowed functions: write, malloc, free
 --------------------------------------------------------------------------------
 
-Write a program who takes rows of a chessboard in argument and check if your 
-King is in a check position.
+Ecrire un programme qui prendra en arguments les lignes d'un plateau de jeu 
+d'échecs, et verifie si le Roi est en échec ou non par rapport aux autres 
+pièces en jeu.
 
-Chess is played on a chessboard, a squared board of 8-squares length with 
-specific pieces on it : King, Queen, Bishop, Knight, Rook and Pawns.
-For this exercice, you will only play with Pawns, Bishops, Rooks and Queen...
-and obviously a King.
+Pour rappel, un jeu d'échecs est composé d'un plateau carré de 8 cases de coté 
+et est composé de pièces spécifiques: Roi, Reine, Fou, Cavalier, Tour et Pion.
+Pour cet exercice, nous ne garderons que les Pions, Fous, Tours et Dames, en
+plus du Roi.
 
-Each piece have a specific method of movement, and all patterns of capture are
-detailled in the examples.txt file.
+Chaque pièce peut se déplacer que selon un schéma précis et les patterns de 
+captures sont détaillés dans l'exemple fourni.
 
-A piece can capture only the first ennemy piece it founds on its capture
-patterns.
+Une piece ne peut capturer que la premiere piece possible sur leur trajectoire
+de capture.
 
-The board have a variable size but will remains a square. There's only one King
-and all other pieces are against it. All other characters except those used for
-pieces are considered as empty squares.
+Le plateau peut être de taille différente que le plateau classique, mais sera
+TOUJOURS carré. Il ne peut y avoir qu'un seul Roi et toutes les autres 
+pièces seront contre lui. Tout autre caractere hormis ceux utilises pour les
+pieces d'echec sera considere comme une case vide.
 
-The King is considered as in a check position when an other enemy piece can
-capture it. When it's the case, you will print "Success" on the standard output
-followed by a newline, otherwise you will print "Fail" followed by a newline.
+Le roi est considéré comme en échec si une pièce adverse est en position pour
+le capturer. Si il est en échec, vous devrez afficher "Success" suivi d'une new-
+line, sinon il affichera "Fail" suivi d'une newline.
 
-If there is no arguments, the program will only print a newline.
+Si aucun argument n'est fourni, le programme affichera une newline.
 
-Examples:
+Exemples:
 
-$> ./chessmate '..' '.K' | cat -e
+$> ./check_mate '..' '.K' | cat -e
 Fail$
 $> ./check_mate 'R...' '.K..' '..P.' '....' | cat -e
 Success$
-$> ./chessmate 'R...' 'iheK' '....' 'jeiR' | cat -e
-Success$
-$> ./chessmate | cat -e
+$> ./check_mate | cat -e
 $
 $>
