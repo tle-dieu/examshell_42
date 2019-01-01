@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_bits.c                                     :+:      :+:    :+:   */
+/*   swap_bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 11:36:53 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/11 12:21:01 by tle-dieu         ###   ########.fr       */
+/*   Created: 2018/11/10 11:12:58 by tle-dieu          #+#    #+#             */
+/*   Updated: 2018/12/27 14:27:42 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned char	reverse_bits(unsigned char octet)
+#include <unistd.h>
+
+void	print_bits(unsigned char octet)
 {
 	unsigned char comp;
-	unsigned char rev;
 
-	comp = 1;
-	rev = 0;
-	while (comp)
+	comp = 128;
+	while (comp >= 1)
 	{
 		if (comp & octet)
-			rev += 128 / comp;
-		comp *= 2;
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+		comp /= 2;
 	}
-	return (rev);
 }

@@ -6,11 +6,15 @@
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 10:18:21 by exam              #+#    #+#             */
-/*   Updated: 2018/12/27 01:15:42 by thomas           ###   ########.fr       */
+/*   Updated: 2018/12/27 15:44:43 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "check_mate.h"
+#include <unistd.h>
+#define EQ_B board[j][i] == 'B'
+#define EQ_R board[j][i] == 'R'
+#define EQ_Q board[j][i] == 'Q'
+#define EQ_P board[j][i] == 'P'
 
 int		check_board(char **board, int size)
 {
@@ -38,12 +42,63 @@ int		check_board(char **board, int size)
 	return (0);
 }
 
+int		check_cross(char **board, int i, int j, int size)
+{
+	int tmp_i;
+	int tmp_j;
+
+	tmp_i = i;
+	tmp_j = j;
+	while (++i < size && !(EQ_B || EQ_P))
+		if (EQ_R || EQ_Q)
+			return (1);
+	i = tmp_i;
+	while (--i >= 0 && !(EQ_B || EQ_P))
+		if (EQ_R || EQ_Q)
+			return (1);
+	i = tmp_i;
+	while (++j < size && !(EQ_B || EQ_P))
+		if (EQ_R || EQ_Q)
+			return (1);
+	j = tmp_j;
+	while (--j >= 0 && !(EQ_B || EQ_P))
+		if (EQ_R || EQ_Q)
+			return (1);
+	return (0);
+}
+
+int		check_diagonal(char **board, int i, int j, int size)
+{
+	int tmp_i;
+	int tmp_j;
+
+	tmp_i = i;
+	tmp_j = j;
+	while (++j < size && ++i < size && !(EQ_R || (EQ_P && i != tmp_i + 1)))
+		if (EQ_Q || EQ_B || (EQ_P && i == tmp_i + 1))
+			return (1);
+	j = tmp_j;
+	i = tmp_i;
+	while (++j < size && --i >= 0 && !(EQ_R || (EQ_P && i != tmp_i - 1)))
+		if (EQ_Q || EQ_B || (EQ_P && i == tmp_i - 1))
+			return (1);
+	i = tmp_i;
+	j = tmp_j;
+	while (--j >= 0 && --i >= 0 && !(EQ_R || EQ_P))
+		if (EQ_Q || EQ_B)
+			return (1);
+	i = tmp_i;
+	j = tmp_j;
+	while (--j >= 0 && ++i < size && !(EQ_R || EQ_P))
+		if (EQ_Q || EQ_B)
+			return (1);
+	return (0);
+}
+
 int		check_mate(char **board, int size)
 {
 	int j;
 	int i;
-	int tmp_j;
-	int tmp_i;
 
 	j = 0;
 	if (!check_board(board, size))
@@ -54,78 +109,7 @@ int		check_mate(char **board, int size)
 			while (i < size)
 			{
 				if (board[j][i] == 'K')
-				{
-					tmp_i = i;
-					while (++i < size)
-					{
-						if (EQ_R || EQ_Q)
-							return (1);
-						else if (EQ_B || EQ_P)
-							break ;
-					}
-					i = tmp_i;
-					while (--i >= 0)
-					{
-						if (EQ_R || EQ_Q)
-							return (1);
-						else if (EQ_B || EQ_P)
-							break ;
-					}
-					i = tmp_i;
-					tmp_j = j;
-					while (++j < size)
-					{
-						if (EQ_R || EQ_Q)
-							return (1);
-						else if (EQ_B || EQ_P)
-							break ;
-					}
-					j = tmp_j;
-					while (--j >= 0)
-					{
-						if (EQ_R || EQ_Q)
-							return (1);
-						else if (EQ_B || EQ_P)
-							break ;
-					}
-					j = tmp_j;
-					while (++j < size && ++i < size)
-					{
-						if (EQ_Q || EQ_B || (EQ_P && i == tmp_i + 1))
-							return (1);
-						else if (EQ_R || EQ_P)
-							break ;
-					}
-					j = tmp_j;
-					i = tmp_i;
-					while (++j < size && --i >= 0)
-					{
-						if (EQ_Q || EQ_B || (EQ_P && i == tmp_i - 1))
-							return (1);
-						else if (EQ_R || EQ_P)
-							break ;
-					}
-					i = tmp_i;
-					j = tmp_j;
-					while (--j >= 0 && --i >= 0)
-					{
-						if (EQ_Q || EQ_B)
-							return (1);
-						else if (EQ_R || EQ_P)
-							break ;
-					}
-					i = tmp_i;
-					j = tmp_j;
-					while (--j >= 0 && ++i < size)
-					{
-						if (EQ_Q || EQ_B)
-							return (1);
-						else if (EQ_R || EQ_P)
-							break ;
-					}
-					i = tmp_i;
-					j = tmp_j;
-				}
+					return (check_cross(board, i, j, size) || check_diagonal(board, i, j, size));
 				i++;
 			}
 			j++;
