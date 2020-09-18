@@ -41,6 +41,17 @@
 *.su
 *.idb
 *.pdb
+*.tmp
+
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Macos
+.DS_Store
 
 # Kernel Module Compile Results
 *.mod*
@@ -50,3 +61,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+tmp/
+
+# Editor
+.vscode
